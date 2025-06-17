@@ -1,59 +1,110 @@
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BaZiVerse - Unlock Your Cosmic Blueprint</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaZiVerse - Unlock Your Cosmic Blueprint</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-<style>
-    body {
-        font-family: 'Noto Sans TC', sans-serif;
-        background-color: #0c0a1d;
-        color: #E0E0E0;
-    }
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #0c0a1d;
+            color: #E0E0E0;
+            line-height: 1.6; /* Enhance readability */
+        }
 
-    .celestial-gradient-text {
-        background: linear-gradient(90deg, #9370DB, #00BFFF, #FFD700);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+        .celestial-gradient-text {
+            background: linear-gradient(90deg, #9370DB, #00BFFF, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .glass-card {
-        background: rgba(22, 28, 58, 0.5);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 1rem;
-    }
+        .glass-card {
+            background: rgba(22, 28, 58, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+        }
 
-    .btn-primary {
-        background: linear-gradient(90deg, #00BFFF, #9370DB);
-        transition: all 0.3s ease;
-        box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
-    }
+        .btn-primary {
+            background: linear-gradient(90deg, #00BFFF, #9370DB);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+        }
 
-    .btn-primary:hover {
-        transform: translateY(-2px) scale(1.05);
-        box-shadow: 0 0 25px rgba(147, 112, 219, 0.7);
-    }
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 25px rgba(147, 112, 219, 0.7);
+        }
 
-    .nav-link-active {
-        color: #00BFFF;
-        text-shadow: 0 0 5px #00BFFF;
-    }
+        .nav-link-active {
+            color: #00BFFF;
+            text-shadow: 0 0 5px #00BFFF;
+        }
 
-    .chart-container {
-        position: relative;
-        width: 100%;
-        max-width: 400px;
-        margin-left: auto;
-        margin-right: auto;
-        height: auto;
-        aspect-ratio: 1 / 1;
-    }
-</style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: auto;
+            aspect-ratio: 1 / 1;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 767px) {
+            .text-4xl {
+                font-size: 2.5rem; /* Adjust heading size for mobile */
+            }
+            .text-xl {
+                font-size: 1.125rem;
+            }
+            .py-3, .py-2 {
+                padding-top: 0.75rem;
+                padding-bottom: 0.75rem;
+            }
+            .px-6 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .space-x-4 > *:not([hidden]) ~ *:not([hidden]) {
+                margin-left: 0 !important; /* Remove horizontal space for buttons */
+                margin-top: 1rem; /* Add vertical space */
+            }
+            .flex-col-mobile {
+                flex-direction: column; /* Force column layout for buttons */
+            }
+            .h-screen {
+                min-height: 100vh;
+                height: auto; /* Allow height to adjust content */
+                padding-top: 6rem; /* Add padding for fixed header */
+                padding-bottom: 4rem;
+            }
+            .container {
+                max-width: 100%; /* Ensure container fills width */
+            }
+            .roadmap .flex-row-reverse { /* Adjust roadmap for mobile */
+                flex-direction: row;
+            }
+            .roadmap .border {
+                left: 24px !important; /* Adjust line position */
+            }
+            .roadmap .w-5/12 {
+                width: calc(100% - 70px); /* Adjust content width */
+                margin-left: 70px; /* Align content next to line */
+            }
+            .roadmap .z-20 {
+                margin-left: 0; /* Remove margin for circles */
+            }
+        }
+    </style>
 </head>
 
 <body class="overflow-x-hidden">
@@ -61,11 +112,11 @@
     <canvas id="starry-sky" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
 
     <header class="fixed top-0 left-0 w-full bg-black/30 backdrop-blur-md z-50 transition-all duration-300" id="navbar">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <nav class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
             <a href="#hero" class="flex items-center space-x-2">
                 <img src="https://storage.googleapis.com/assistly/d5f0e932-5a50-432d-8e65-470a1a0827ea/太空陰陽1.jpg"
-                    alt="BaZiVerse Logo" class="h-10 w-10 rounded-full">
-                <span class="text-xl font-bold text-white">BaZiVerse</span>
+                    alt="BaZiVerse Logo" class="h-8 w-8 sm:h-10 sm:w-10 rounded-full">
+                <span class="text-lg sm:text-xl font-bold text-white">BaZiVerse</span>
             </a>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#vision" class="nav-link text-gray-300 hover:text-white transition">Vision</a>
@@ -76,7 +127,7 @@
             </div>
             <a href="#how-to-buy"
                 class="hidden md:block bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-full transition">How to Buy</a>
-            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none p-2 rounded-md">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
@@ -84,7 +135,7 @@
                 </svg>
             </button>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-black/50">
+        <div id="mobile-menu" class="hidden md:hidden bg-black/50 py-2">
             <a href="#vision" class="block py-2 px-4 text-sm text-gray-200 hover:bg-gray-800">Vision</a>
             <a href="#utility" class="block py-2 px-4 text-sm text-gray-200 hover:bg-gray-800">Core Features</a>
             <a href="#tokenomics" class="block py-2 px-4 text-sm text-gray-200 hover:bg-gray-800">Tokenomics</a>
@@ -95,21 +146,21 @@
     </header>
 
     <main>
-        <section id="hero" class="h-screen flex items-center justify-center text-center relative overflow-hidden">
+        <section id="hero" class="min-h-screen flex items-center justify-center text-center relative overflow-hidden py-16">
             <div class="z-10 px-4">
                 <img src="https://storage.googleapis.com/assistly/d5f0e932-5a50-432d-8e65-470a1a0827ea/太空陰陽1.jpg"
                     alt="BaZiVerse Logo"
-                    class="h-40 w-40 rounded-full mx-auto mb-8 animate-pulse shadow-2xl shadow-cyan-500/50">
+                    class="h-32 w-32 sm:h-40 sm:w-40 rounded-full mx-auto mb-8 animate-pulse shadow-2xl shadow-cyan-500/50">
                 <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4">Welcome to
                     <span class="celestial-gradient-text">BaZiVerse</span>
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">Combining ancient Eastern wisdom with future blockchain technology to unlock your exclusive cosmic blueprint.</p>
-                <div class="space-x-4">
-                    <a href="#how-to-buy" class="btn-primary text-white font-bold py-3 px-8 rounded-full text-lg">
+                <p class="text-lg md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto px-4">Combining ancient Eastern wisdom with future blockchain technology to unlock your exclusive cosmic blueprint.</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#how-to-buy" class="btn-primary text-white font-bold py-3 px-8 rounded-full text-lg w-full sm:w-auto">
                         Buy $BAZI Now
                     </a>
                     <a href="#utility"
-                        class="bg-transparent border-2 border-cyan-400 text-cyan-400 font-bold py-3 px-8 rounded-full text-lg hover:bg-cyan-400 hover:text-black transition">
+                        class="bg-transparent border-2 border-cyan-400 text-cyan-400 font-bold py-3 px-8 rounded-full text-lg hover:bg-cyan-400 hover:text-black transition w-full sm:w-auto">
                         Explore Core Features
                     </a>
                 </div>
@@ -119,7 +170,7 @@
         <section id="vision" class="py-20 md:py-32">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Our Vision</h2>
-                <p class="text-lg text-gray-400 max-w-4xl mx-auto mb-12">
+                <p class="text-base sm:text-lg text-gray-400 max-w-4xl mx-auto mb-12 px-4">
                     In the vast universe of meme coins, we are more than just fleeting stardust. BaZiVerse was born to
                     build a bridge connecting ancient wisdom with digital culture. We reject the inherent lack of value
                     in traditional meme coins by introducing unique "BaZi Natal Chart Reports" as a core utility. We
@@ -128,18 +179,18 @@
                     to build a vibrant, actively participating global community whose members gather not only for the
                     potential of cryptocurrency but also for their shared interest in self-exploration and destiny.
                 </p>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="glass-card p-8">
-                        <h3 class="text-2xl font-bold celestial-gradient-text mb-4">Cultural Integration</h3>
-                        <p class="text-gray-400">Integrating millennia of BaZi wisdom into modern meme culture, creating an unprecedented value experience.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+                    <div class="glass-card p-6 sm:p-8">
+                        <h3 class="text-xl sm:text-2xl font-bold celestial-gradient-text mb-4">Cultural Integration</h3>
+                        <p class="text-sm sm:text-base text-gray-400">Integrating millennia of BaZi wisdom into modern meme culture, creating an unprecedented value experience.</p>
                     </div>
-                    <div class="glass-card p-8">
-                        <h3 class="text-2xl font-bold celestial-gradient-text mb-4">Community Driven</h3>
-                        <p class="text-400">Building a strong community based on shared interests, collectively driving the growth and development of BaZiVerse.</p>
+                    <div class="glass-card p-6 sm:p-8">
+                        <h3 class="text-xl sm:text-2xl font-bold celestial-gradient-text mb-4">Community Driven</h3>
+                        <p class="text-sm sm:text-base text-gray-400">Building a strong community based on shared interests, collectively driving the growth and development of BaZiVerse.</p>
                     </div>
-                    <div class="glass-card p-8">
-                        <h3 class="text-2xl font-bold celestial-gradient-text mb-4">Real Utility</h3>
-                        <p class="text-gray-400">Providing personalized BaZi reports to bring real, tangible value to holders beyond speculation.</p>
+                    <div class="glass-card p-6 sm:p-8">
+                        <h3 class="text-xl sm:text-2xl font-bold celestial-gradient-text mb-4">Real Utility</h3>
+                        <p class="text-sm sm:text-base text-gray-400">Providing personalized BaZi reports to bring real, tangible value to holders beyond speculation.</p>
                     </div>
                 </div>
             </div>
@@ -149,22 +200,22 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">The Soul of BaZiVerse: Your Cosmic Report</h2>
-                    <p class="text-lg text-gray-400 max-w-3xl mx-auto">
+                    <p class="text-base sm:text-lg text-gray-400 max-w-3xl mx-auto px-4">
                         We promise not to provide complicated calculators. Instead, we offer a personalized, in-depth, and easy-to-understand destiny analysis report tailored for you. This is an exclusive privilege provided to those holding 1% or more of $BAZI tokens.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center px-4">
                     <div>
                         <h3 class="text-2xl font-bold text-white mb-6">How to Unlock Your Report?</h3>
-                        <ol class="relative border-l border-gray-700">
+                        <ol class="relative border-l border-gray-700 ml-4">
                             <li class="mb-10 ml-6">
                                 <span
                                     class="absolute flex items-center justify-center w-8 h-8 bg-blue-900 rounded-full -left-4 ring-4 ring-gray-900">
                                     <span class="text-lg font-bold">1</span>
                                 </span>
                                 <h4 class="flex items-center mb-1 text-xl font-semibold text-white">Become a Core Holder</h4>
-                                <p class="mb-4 text-base font-normal text-gray-400">Purchase and hold 1% or more of the total supply of $BAZI tokens.</p>
+                                <p class="mb-4 text-sm sm:text-base font-normal text-gray-400">Purchase and hold 1% or more of the total supply of $BAZI tokens.</p>
                             </li>
                             <li class="mb-10 ml-6">
                                 <span
@@ -172,7 +223,7 @@
                                     <span class="text-lg font-bold">2</span>
                                 </span>
                                 <h4 class="mb-1 text-xl font-semibold text-white">Verify Your Identity</h4>
-                                <p class="text-base font-normal text-gray-400">Connect your crypto wallet; our smart contract will automatically verify your eligibility.</p>
+                                <p class="text-sm sm:text-base font-normal text-gray-400">Connect your crypto wallet; our smart contract will automatically verify your eligibility.</p>
                             </li>
                             <li class="ml-6">
                                 <span
@@ -180,7 +231,7 @@
                                     <span class="text-lg font-bold">3</span>
                                 </span>
                                 <h4 class="mb-1 text-xl font-semibold text-white">Receive Your Cosmic Blueprint</h4>
-                                <p class="text-base font-normal text-gray-400">Submit your birth information, and our powerful backend engine will generate a comprehensive and accurate personal report for you.</p>
+                                <p class="text-sm sm:text-base font-normal text-gray-400">Submit your birth information, and our powerful backend engine will generate a comprehensive and accurate personal report for you.</p>
                             </li>
                         </ol>
                     </div>
@@ -191,35 +242,35 @@
                                 <span class="text-3xl">🧬</span>
                                 <div>
                                     <h4 class="font-semibold text-white">Personality and Talents</h4>
-                                    <p class="text-sm text-gray-400">In-depth analysis of your personality strengths and weaknesses, uncovering potential talents.</p>
+                                    <p class="text-xs sm:text-sm text-gray-400">In-depth analysis of your personality strengths and weaknesses, uncovering potential talents.</p>
                                 </div>
                             </div>
                             <div class="glass-card p-4 flex items-center space-x-4">
                                 <span class="text-3xl">💼</span>
                                 <div>
                                     <h4 class="font-semibold text-white">Career and Wealth</h4>
-                                    <p class="text-sm text-gray-400">Forecast career development trends and wealth opportunities.</p>
+                                    <p class="text-xs sm:text-sm text-gray-400">Forecast career development trends and wealth opportunities.</p>
                                 </div>
                             </div>
                             <div class="glass-card p-4 flex items-center space-x-4">
                                 <span class="text-3xl">❤️</span>
                                 <div>
                                     <h4 class="font-semibold text-white">Relationships and Family</h4>
-                                    <p class="text-sm text-gray-400">Explore relationship dynamics and the path to family harmony.</p>
+                                    <p class="text-xs sm:text-sm text-gray-400">Explore relationship dynamics and the path to family harmony.</p>
                                 </div>
                             </div>
                             <div class="glass-card p-4 flex items-center space-x-4">
                                 <span class="text-3xl">🌿</span>
                                 <div>
                                     <h4 class="font-semibold text-white">Health and Well-being</h4>
-                                    <p class="text-sm text-gray-400">Predict potential health issues and offer recommendations for well-being.</p>
+                                    <p class="text-xs sm:text-sm text-gray-400">Predict potential health issues and offer recommendations for well-being.</p>
                                 </div>
                             </div>
                             <div class="glass-card p-4 flex items-center space-x-4">
                                 <span class="text-3xl">🧭</span>
                                 <div>
                                     <h4 class="font-semibold text-white">Guide to Prosperity and Avoiding Adversity</h4>
-                                    <p class="text-sm text-gray-400">Provide practical advice based on your natal chart to optimize life decisions.</p>
+                                    <p class="text-xs sm:text-sm text-gray-400">Provide practical advice based on your natal chart to optimize life decisions.</p>
                                 </div>
                             </div>
                         </div>
@@ -232,25 +283,25 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Tokenomics</h2>
-                    <p class="text-lg text-gray-400 max-w-3xl mx-auto">A fair, transparent, and community-designed economic model is the cornerstone of BaZiVerse's long-term development.</p>
+                    <p class="text-base sm:text-lg text-gray-400 max-w-3xl mx-auto px-4">A fair, transparent, and community-designed economic model is the cornerstone of BaZiVerse's long-term development.</p>
                 </div>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center px-4">
                     <div class="chart-container">
                         <canvas id="tokenomicsChart"></canvas>
                     </div>
                     <div class="text-left">
                         <h3 class="text-2xl font-bold text-white mb-4">Token Distribution</h3>
-                        <p class="text-gray-400 mb-6">Our token distribution aims to incentivize the community, ensure liquidity, and support the project's continuous development.</p>
+                        <p class="text-sm sm:text-base text-gray-400 mb-6">Our token distribution aims to incentivize the community, ensure liquidity, and support the project's continuous development.</p>
                         <ul class="space-y-4">
                             <li class="flex items-center">
-                                <span class="w-4 h-4 rounded-full bg-[#3B82F6] mr-3"></span><span class="text-white">Developer Share: 35%</span>
+                                <span class="w-4 h-4 rounded-full bg-[#3B82F6] mr-3"></span><span class="text-white text-sm sm:text-base">Developer Share: 35%</span>
                             </li>
                             <li class="flex items-center">
-                                <span class="w-4 h-4 rounded-full bg-[#10B981] mr-3"></span><span class="text-white">Community Purchase After Issuance: 65%</span>
+                                <span class="w-4 h-4 rounded-full bg-[#10B981] mr-3"></span><span class="text-white text-sm sm:text-base">Community Purchase After Issuance: 65%</span>
                             </li>
                         </ul>
                         <div class="mt-8 p-4 glass-card">
-                            <p class="text-white font-mono text-sm break-all"><span class="font-bold">Contract Address:</span>
+                            <p class="text-white font-mono text-xs sm:text-sm break-all"><span class="font-bold">Contract Address:</span>
                                 0x1234...AbCdEfgH5678 (To be updated upon launch)</p>
                         </div>
                     </div>
@@ -258,56 +309,99 @@
             </div>
         </section>
 
-        <section id="roadmap" class="py-20 md:py-32 bg-black/20">
+        <section id="roadmap" class="py-20 md:py-32 bg-black/20 roadmap">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Roadmap</h2>
-                    <p class="text-lg text-gray-400 max-w-3xl mx-auto">Our journey has just begun. This is a star map to the future, guiding us forward.</p>
+                    <p class="text-base sm:text-lg text-gray-400 max-w-3xl mx-auto px-4">Our journey has just begun. This is a star map to the future, guiding us forward.</p>
                 </div>
                 <div class="relative wrap overflow-hidden p-10 h-full">
                     <div class="border-2-2 absolute border-opacity-20 border-gray-700 h-full border"
-                        style="left: 50%">
+                        style="left: 50%;">
                     </div>
-                    <div class="mb-8 flex justify-between items-center w-full right-timeline">
-                        <div class="order-1 w-5/12"></div>
-                        <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-12 h-12 rounded-full">
-                            <h1 class="mx-auto font-semibold text-lg text-white">1</h1>
+                    <div class="md:hidden">
+                        <div class="mb-8 flex items-center w-full right-timeline">
+                            <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-10 h-10 rounded-full">
+                                <h1 class="mx-auto font-semibold text-md text-white">1</h1>
+                            </div>
+                            <div class="order-1 glass-card w-full px-4 py-3 ml-4">
+                                <h3 class="mb-2 font-bold text-white text-lg">Phase One: Genesis</h3>
+                                <p class="text-xs leading-snug tracking-wide text-gray-400">Concept creation, core team formation, whitepaper release, website launch.</p>
+                            </div>
                         </div>
-                        <div class="order-1 glass-card w-5/12 px-6 py-4">
-                            <h3 class="mb-3 font-bold text-white text-xl">Phase One: Genesis</h3>
-                            <p class="text-sm leading-snug tracking-wide text-gray-400">Concept creation, core team formation, whitepaper release, website launch.</p>
+                        <div class="mb-8 flex items-center w-full right-timeline">
+                            <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-10 h-10 rounded-full">
+                                <h1 class="mx-auto text-white font-semibold text-md">2</h1>
+                            </div>
+                            <div class="order-1 glass-card w-full px-4 py-3 ml-4">
+                                <h3 class="mb-2 font-bold text-white text-lg">Phase Two: Launch</h3>
+                                <p class="text-xs leading-snug tracking-wide text-gray-400">$BAZI token issuance, DEX listing, launch of initial community marketing campaigns.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mb-8 flex items-center w-full right-timeline">
+                            <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-10 h-10 rounded-full">
+                                <h1 class="mx-auto font-semibold text-md text-white">3</h1>
+                            </div>
+                            <div class="order-1 glass-card w-full px-4 py-3 ml-4">
+                                <h3 class="mb-2 font-bold text-white text-lg">Phase Three: Empowerment</h3>
+                                <p class="text-xs leading-snug tracking-wide text-gray-400">
+                                    Official launch of the BaZi report feature, providing exclusive services for core holders, establishing initial partnerships.</p>
+                            </div>
+                        </div>
+                        <div class="mb-8 flex items-center w-full right-timeline">
+                            <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-10 h-10 rounded-full">
+                                <h1 class="mx-auto text-white font-semibold text-md">4</h1>
+                            </div>
+                            <div class="order-1 glass-card w-full px-4 py-3 ml-4">
+                                <h3 class="mb-2 font-bold text-white text-lg">Phase Four: Expansion</h3>
+                                <p class="text-xs leading-snug tracking-wide text-gray-400">Exploring BaZi-themed NFTs, DeFi integration, and metaverse gamified experiences, expanding the BaZiVerse ecosystem.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
-                        <div class="order-1 w-5/12"></div>
-                        <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-12 h-12 rounded-full">
-                            <h1 class="mx-auto text-white font-semibold text-lg">2</h1>
+
+                    <div class="hidden md:block">
+                        <div class="mb-8 flex justify-between items-center w-full right-timeline">
+                            <div class="order-1 w-5/12"></div>
+                            <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-12 h-12 rounded-full">
+                                <h1 class="mx-auto font-semibold text-lg text-white">1</h1>
+                            </div>
+                            <div class="order-1 glass-card w-5/12 px-6 py-4">
+                                <h3 class="mb-3 font-bold text-white text-xl">Phase One: Genesis</h3>
+                                <p class="text-sm leading-snug tracking-wide text-gray-400">Concept creation, core team formation, whitepaper release, website launch.</p>
+                            </div>
                         </div>
-                        <div class="order-1 glass-card w-5/12 px-6 py-4">
-                            <h3 class="mb-3 font-bold text-white text-xl">Phase Two: Launch</h3>
-                            <p class="text-sm leading-snug tracking-wide text-gray-400">$BAZI token issuance, DEX listing, launch of initial community marketing campaigns.
-                            </p>
+                        <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
+                            <div class="order-1 w-5/12"></div>
+                            <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-12 h-12 rounded-full">
+                                <h1 class="mx-auto text-white font-semibold text-lg">2</h1>
+                            </div>
+                            <div class="order-1 glass-card w-5/12 px-6 py-4">
+                                <h3 class="mb-3 font-bold text-white text-xl">Phase Two: Launch</h3>
+                                <p class="text-sm leading-snug tracking-wide text-gray-400">$BAZI token issuance, DEX listing, launch of initial community marketing campaigns.
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-8 flex justify-between items-center w-full right-timeline">
-                        <div class="order-1 w-5/12"></div>
-                        <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-12 h-12 rounded-full">
-                            <h1 class="mx-auto font-semibold text-lg text-white">3</h1>
+                        <div class="mb-8 flex justify-between items-center w-full right-timeline">
+                            <div class="order-1 w-5/12"></div>
+                            <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-12 h-12 rounded-full">
+                                <h1 class="mx-auto font-semibold text-lg text-white">3</h1>
+                            </div>
+                            <div class="order-1 glass-card w-5/12 px-6 py-4">
+                                <h3 class="mb-3 font-bold text-white text-xl">Phase Three: Empowerment</h3>
+                                <p class="text-sm leading-snug tracking-wide text-gray-400">
+                                    Official launch of the BaZi report feature, providing exclusive services for core holders, establishing initial partnerships.</p>
+                            </div>
                         </div>
-                        <div class="order-1 glass-card w-5/12 px-6 py-4">
-                            <h3 class="mb-3 font-bold text-white text-xl">Phase Three: Empowerment</h3>
-                            <p class="text-sm leading-snug tracking-wide text-gray-400">
-                                Official launch of the BaZi report feature, providing exclusive services for core holders, establishing initial partnerships.</p>
-                        </div>
-                    </div>
-                    <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
-                        <div class="order-1 w-5/12"></div>
-                        <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-12 h-12 rounded-full">
-                            <h1 class="mx-auto text-white font-semibold text-lg">4</h1>
-                        </div>
-                        <div class="order-1 glass-card w-5/12 px-6 py-4">
-                            <h3 class="mb-3 font-bold text-white text-xl">Phase Four: Expansion</h3>
-                            <p class="text-sm leading-snug tracking-wide text-gray-400">Exploring BaZi-themed NFTs, DeFi integration, and metaverse gamified experiences, expanding the BaZiVerse ecosystem.</p>
+                        <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
+                            <div class="order-1 w-5/12"></div>
+                            <div class="z-20 flex items-center order-1 bg-gray-800 shadow-xl w-12 h-12 rounded-full">
+                                <h1 class="mx-auto text-white font-semibold text-lg">4</h1>
+                            </div>
+                            <div class="order-1 glass-card w-5/12 px-6 py-4">
+                                <h3 class="mb-3 font-bold text-white text-xl">Phase Four: Expansion</h3>
+                                <p class="text-sm leading-snug tracking-wide text-gray-400">Exploring BaZi-themed NFTs, DeFi integration, and metaverse gamified experiences, expanding the BaZiVerse ecosystem.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -318,29 +412,29 @@
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">How to Buy $BAZI Tokens on Pump.fun</h2>
-                    <p class="text-lg text-gray-400 max-w-3xl mx-auto">Join the BaZiVerse cosmic journey in just a few simple steps.</p>
+                    <p class="text-base sm:text-lg text-gray-400 max-w-3xl mx-auto px-4">Join the BaZiVerse cosmic journey in just a few simple steps.</p>
                 </div>
-                <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center px-4">
                     <div class="glass-card p-6">
-                        <div class="text-5xl mb-4">1</div>
-                        <h3 class="text-xl font-bold celestial-gradient-text mb-2">Prepare Your Solana Wallet</h3>
-                        <p class="text-gray-400">Download and install a Solana-compatible wallet, such as Phantom or Solflare.</p>
+                        <div class="text-4xl sm:text-5xl mb-4">1</div>
+                        <h3 class="text-lg sm:text-xl font-bold celestial-gradient-text mb-2">Prepare Your Solana Wallet</h3>
+                        <p class="text-sm sm:text-base text-gray-400">Download and install a Solana-compatible wallet, such as Phantom or Solflare.</p>
                     </div>
                     <div class="glass-card p-6">
-                        <div class="text-5xl mb-4">2</div>
-                        <h3 class="text-xl font-bold celestial-gradient-text mb-2">Fund with SOL</h3>
-                        <p class="text-gray-400">Purchase SOL from a centralized exchange (e.g., Binance, Coinbase) and send it to your Solana wallet.</p>
+                        <div class="text-4xl sm:text-5xl mb-4">2</div>
+                        <h3 class="text-lg sm:text-xl font-bold celestial-gradient-text mb-2">Fund with SOL</h3>
+                        <p class="text-sm sm:text-base text-gray-400">Purchase SOL from a centralized exchange (e.g., Binance, Coinbase) and send it to your Solana wallet.</p>
                     </div>
                     <div class="glass-card p-6">
-                        <div class="text-5xl mb-4">3</div>
-                        <h3 class="text-xl font-bold celestial-gradient-text mb-2">Visit Pump.fun</h3>
-                        <p class="text-gray-400">Access <a href="https://pump.fun/" target="_blank"
+                        <div class="text-4xl sm:text-5xl mb-4">3</div>
+                        <h3 class="text-lg sm:text-xl font-bold celestial-gradient-text mb-2">Visit Pump.fun</h3>
+                        <p class="text-sm sm:text-base text-gray-400">Access <a href="https://pump.fun/" target="_blank"
                                 class="text-blue-400 hover:underline">pump.fun</a> through your wallet's built-in browser or a desktop browser.</p>
                     </div>
                     <div class="glass-card p-6">
-                        <div class="text-5xl mb-4">4</div>
-                        <h3 class="text-xl font-bold celestial-gradient-text mb-2">Buy $BAZI</h3>
-                        <p class="text-gray-400">Connect your Solana wallet, find the $BAZI token, enter the amount you wish to purchase, and confirm the transaction.</p>
+                        <div class="text-4xl sm:text-5xl mb-4">4</div>
+                        <h3 class="text-lg sm:text-xl font-bold celestial-gradient-text mb-2">Buy $BAZI</h3>
+                        <p class="text-sm sm:text-base text-gray-400">Connect your Solana wallet, find the $BAZI token, enter the amount you wish to purchase, and confirm the transaction.</p>
                     </div>
                 </div>
             </div>
@@ -349,11 +443,10 @@
         <section id="community" class="py-20 md:py-32 bg-black/20 text-center">
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Join Our Interstellar Community</h2>
-                <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-12">Connect with like-minded individuals from around the world, share your insights, and witness the growth of BaZiVerse together. Follow our official channels for the latest news and exclusive events.</p>
-                <div class="flex justify-center space-x-6">
-                    <a href="https://x.com/BaZiVERSE" class="btn-primary text-white p-4 rounded-full text-2xl">X/Twitter</a>
-                    <a href="#" class="btn-primary text-white p-4 rounded-full text-2xl">Telegram</a>
-                    <a href="https://discord.com/channels/1382697778995527750/1382697780144898212" class="btn-primary text-white p-4 rounded-full text-2xl">Discord</a>
+                <p class="text-base sm:text-lg text-gray-400 max-w-3xl mx-auto mb-12 px-4">Connect with like-minded individuals from around the world, share your insights, and witness the growth of BaZiVerse together. Follow our official channels for the latest news and exclusive events.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://x.com/BaZiVERSE" class="btn-primary text-white p-3 sm:p-4 rounded-full text-lg sm:text-2xl min-w-[150px] flex justify-center items-center">X/Twitter</a>
+                    <a href="https://discord.com/channels/1382697778995527750/1382697780144898212" class="btn-primary text-white p-3 sm:p-4 rounded-full text-lg sm:text-2xl min-w-[150px] flex justify-center items-center">Discord</a>
                 </div>
             </div>
         </section>
@@ -362,10 +455,9 @@
     <footer class="bg-gray-900 text-center py-8">
         <div class="container mx-auto px-6 text-gray-500">
             <p>&copy; 2025 BaZiVerse. All Rights Reserved.</p>
-            <p class="text-sm mt-2">Disclaimer: Cryptocurrency investments carry high risks. BaZiVerse is for entertainment and experimental purposes only, and the information provided does not constitute financial advice. Please do your own research and assess risks before investing.</p>
+            <p class="text-xs sm:text-sm mt-2 px-4">Disclaimer: Cryptocurrency investments carry high risks. BaZiVerse is for entertainment and experimental purposes only, and the information provided does not constitute financial advice. Please do your own research and assess risks before investing.</p>
         </div>
     </footer>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -531,5 +623,4 @@
         });
     </script>
 </body>
-
 </html>
